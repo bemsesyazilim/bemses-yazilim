@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>BEMSES | Yazılım Teknoloji Atölyesi</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+background:#000;
+color:#e6eeff;
+font-family:Arial, sans-serif;
+overflow-x:hidden;
+}
+
+/* === TÜM SAYFA YOĞUN AKAN KOD === */
+.code-bg{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+overflow:hidden;
+z-index:0;
+}
+
+.stream{
+position:absolute;
+top:-300%;
+width:25%;
+height:600%;
+font-family:monospace;
+font-size:15px;
+line-height:24px;
+color:rgba(220,230,255,0.35);
+white-space:pre;
+animation:scroll 12s linear infinite;
+}
+
+.stream:nth-child(1){left:0;animation-duration:10s}
+.stream:nth-child(2){left:25%;animation-duration:12s}
+.stream:nth-child(3){left:50%;animation-duration:11s}
+.stream:nth-child(4){left:75%;animation-duration:13s}
+
+@keyframes scroll{
+0%{transform:translateY(0)}
+100%{transform:translateY(60%)}
+}
+
+/* ÖN KATMAN */
+.content{
+position:relative;
+z-index:5;
+}
+
+/* HEADER */
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.85);
+border-bottom:1px solid rgba(255,255,255,0.15);
+z-index:10;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+letter-spacing:4px;
+background:linear-gradient(90deg,#ffffff,#cfd8ff,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav a{
+color:#cfd8ff;
+margin-left:20px;
+text-decoration:none;
+}
+nav a:hover{color:white}
+
+/* HERO */
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding-top:120px;
+}
+
+.hero h1{
+font-size:50px;
+background:linear-gradient(90deg,#ffffff,#dbe4ff,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+margin-top:14px;
+color:#cbd6ff;
+}
+
+/* SECTIONS */
+section{
+padding:100px 60px;
+}
+
+/* HİZMETLER – TEMİZ */
+#services{
+background:#000;
+position:relative;
+z-index:6;
+}
+
+h2{
+font-size:30px;
+margin-bottom:30px;
+border-bottom:1px solid rgba(255,255,255,0.25);
+display:inline-block;
+padding-bottom:10px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+}
+
+.card{
+background:#0f0f0f;
+padding:24px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.18);
+}
+
+/* İLETİŞİM */
+.contact a{
+color:#cfd8ff;
+text-decoration:none;
+}
+.contact a:hover{color:white;text-decoration:underline}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:25px;
+border-top:1px solid rgba(255,255,255,0.12);
+}
+</style>
+</head>
+
+<body>
+
+<!-- YOĞUN AKAN KOD -->
+<div class="code-bg">
+
+<div class="stream">
+while(true){
+ console.log("BEMSES");
+}
+function code(){
+ let tech=["Python","Robotik","Web","AI"];
+ tech.forEach(t=>console.log(t));
+}
+&lt;html&gt;&lt;script&gt;
+</div>
+
+<div class="stream">
+class Student{
+ constructor(){
+  this.future="Yazılım";
+ }
+ learn(){
+  return true;
+ }
+}
+if(student.learn()){
+ student.build();
+}
+</div>
+
+<div class="stream">
+const bemses="Yazılım Teknoloji Atölyesi";
+for(let i=0;i<999;i++){
+ console.log(bemses);
+}
+&lt;div&gt;Kodlama&lt;/div&gt;
+</div>
+
+<div class="stream">
+function future(){
+ return "BEMSES";
+}
+setInterval(future,100);
+&lt;body&gt;&lt;/body&gt;
+</div>
+
+</div>
+
+<div class="content">
+
+<header>
+<div class="logo">BEMSES</div>
+<nav>
+<a href="#home">Ana Sayfa</a>
+<a href="#services">Hizmetler</a>
+<a href="#contact">İletişim</a>
+<a href="https://instagram.com/bemsesyazilim" target="_blank">Instagram</a>
+</nav>
+</header>
+
+<div id="home" class="hero">
+<h1>BEMSES<br>Yazılım Teknoloji Atölyesi</h1>
+<p>Çocuklar ve gençler için yazılım ve teknoloji</p>
+</div>
+
+<section id="services">
+<h2>Hizmetlerimiz</h2>
+<div class="cards">
+<div class="card">🐍 Python Eğitimi</div>
+<div class="card">🤖 Robotik Kodlama</div>
+<div class="card">🌐 Web Sitesi Kurma</div>
+<div class="card">💻 Uzaktan Atölye</div>
+<div class="card">📊 Danışmanlık</div>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<h2>İletişim</h2>
+<p>📞 <a href="tel:05302376139">0 (530) 237 61 39</a></p>
+<p>📧 <a href="mailto:bemsesyazilimatolyesi@gmail.com">bemsesyazilimatolyesi@gmail.com</a></p>
+<p>📸 <a href="https://instagram.com/bemsesyazilim" target="_blank">@bemsesyazilim</a></p>
+</section>
+
+<footer>© 2026 BEMSES</footer>
+
+</div>
+</body>
+</html>
