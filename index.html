@@ -1,258 +1,459 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bemses Yazılım Atölyesi - Geleceği Kodluyoruz</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+    <title>Bemses Yazılım Atölyesi | Teknoloji, Dron, QR Kod ve Bakım-Onarım Çözümleri</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        metallic: {
+                            50: '#f4f6f9',
+                            100: '#e2e7ec',
+                            200: '#cbd3df',
+                            300: '#94a1b2',
+                            400: '#647082',
+                            500: '#475161',
+                            600: '#323946',
+                            700: '#222730',
+                            800: '#171a21',
+                            900: '#0d0f13',
+                            950: '#07080a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-dark: #010410; /* Daha derin, uzay siyahı */
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --primary-neon: #3b82f6; 
-            --secondary-neon: #a855f7; 
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative; /* Arka plan animasyonu için */
+            background-color: #0d0f13;
+            color: #cbd3df;
         }
-
-        /* YENİ: DİNAMİK VE HAREKETLİ ARKA PLAN (Görseldeki Gradyan Parlamalar) */
-        body::before,
-        body::after {
-            content: '';
-            position: fixed;
-            width: 150vw;
-            height: 150vh;
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(100px); /* Işıkları yumuşatır */
-            opacity: 0.15; /* Çok parlak olmaması için */
-            animation: backgroundFlow 20s infinite alternate ease-in-out;
+        .metallic-gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #cbd3df 50%, #647082 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        body::before {
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle at center, var(--primary-neon) 0%, transparent 60%);
-        }
-
-        body::after {
-            bottom: -50%;
-            right: -50%;
-            background: radial-gradient(circle at center, var(--secondary-neon) 0%, transparent 60%);
-            animation-delay: -5s; /* Animasyonu kaydırır */
-        }
-
-        @keyframes backgroundFlow {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20vw, 15vh) scale(1.1); }
-            100% { transform: translate(-10vw, -20vh) scale(0.9); }
-        }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-        /* Header & Nav */
-        header {
-            background: rgba(1, 4, 16, 0.85);
+        .metallic-card {
+            background: linear-gradient(145deg, rgba(34, 39, 48, 0.8) 0%, rgba(13, 15, 19, 0.9) 100%);
+            border: 1px solid rgba(148, 161, 178, 0.2);
             backdrop-filter: blur(12px);
-            position: fixed;
-            width: 100%; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
-        nav { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .logo { font-size: 22px; font-weight: 700; text-decoration: none; color: #fff; letter-spacing: -1px; }
-        .logo span { color: var(--primary-neon); }
-        .nav-links { display: flex; list-style: none; gap: 25px; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 14px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary-neon); }
-
-        /* Hero */
-        .hero { height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .hero h1 { font-size: clamp(32px, 5vw, 60px); font-weight: 800; margin-bottom: 20px; background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 18px; color: var(--text-muted); max-width: 650px; margin: 0 auto 35px; }
-
-        /* Butonlar */
-        .btn { display: inline-block; padding: 14px 30px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: 0.3s; cursor: pointer; }
-        .btn-primary { background: var(--primary-neon); color: #fff; box-shadow: 0 10px 20px -10px var(--primary-neon); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 25px -10px var(--primary-neon); }
-        .btn-secondary { border: 1px solid rgba(255,255,255,0.1); color: #fff; margin-left: 10px; }
-        .btn-secondary:hover { background: rgba(255,255,255,0.05); }
-
-        /* Hizmetler Grid */
-        .section { padding: 100px 0; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 36px; margin-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-
-        /* Glassmorphism Kartlar */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 35px;
-            transition: 0.4s;
-            backdrop-filter: blur(5px);
-        }
-        .card:hover { 
-            transform: translateY(-8px); 
-            border-color: rgba(59, 130, 246, 0.4);
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .card-icon { font-size: 28px; color: var(--primary-neon); margin-bottom: 20px; }
-        .card h3 { font-size: 20px; margin-bottom: 12px; }
-        .card p { font-size: 15px; color: var(--text-muted); }
-
-        /* İletişim (Harita Silindi, Tek Kolon Tasarım) */
-        .contact-box {
-            background: rgba(255,255,255,0.02);
-            padding: 60px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.04);
-            text-align: center; max-width: 700px; margin: 0 auto;
-        }
-        .contact-info h2 { font-size: 36px; margin-bottom: 20px; }
-        .contact-info p { color: var(--text-muted); margin-bottom: 40px; }
-        .contact-list { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .contact-list li { display: flex; align-items: center; gap: 15px; font-size: 18px; }
-        .contact-list i { color: var(--secondary-neon); font-size: 22px; width: 30px; text-align: center; }
-        .contact-list a { color: #fff; text-decoration: none; transition: 0.3s; font-weight: 500; }
-        .contact-list a:hover { color: var(--primary-neon); }
-        .contact-list span { color: #fff; }
-
-        footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 13px; margin-top: 50px; }
-
-        @media (max-width: 768px) {
-            .contact-box { padding: 40px; }
-            .nav-links { display: none; }
-            .hero h1 { font-size: 36px; }
+        .metallic-card:hover {
+            border-color: rgba(148, 161, 178, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(100, 112, 130, 0.3);
         }
     </style>
 </head>
-<body>
+<body class="bg-metallic-900 text-metallic-200 font-sans antialiased selection:bg-metallic-500 selection:text-white min-h-screen">
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">BEMSES YAZILIM <span>ATÖLYESİ</span></a>
-                <ul class="nav-links">
-                    <li><a href="#hizmetler">Hizmetler</a></li>
-                    <li><a href="#iletisim">İletişim</a></li>
-                </ul>
-                <a href="mailto:bemsesyazilimatolyesi@gmail.com" class="btn btn-primary" style="padding: 8px 18px; font-size: 13px;">Bize Yazın</a>
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-metallic-950/90 backdrop-blur-md border-b border-metallic-700/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-metallic-200 via-metallic-400 to-metallic-700 flex items-center justify-center border border-metallic-300/30 shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-code text-metallic-950 font-bold"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-wider metallic-gradient-text">BEMSES</span>
+                    <span class="text-xs text-metallic-400 tracking-widest uppercase">Yazılım Atölyesi</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#hakkimizda" class="text-metallic-300 hover:text-white transition-colors">Hakkımızda</a>
+                <a href="#projeler" class="text-metallic-300 hover:text-white transition-colors">Hizmetler & Çözümler</a>
+                <a href="#atolye" class="text-metallic-300 hover:text-white transition-colors">Robotik Atölyesi</a>
+                <a href="#iletisim" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-metallic-600 to-metallic-700 hover:from-metallic-500 hover:to-metallic-600 text-white font-semibold border border-metallic-400/30 transition-all shadow-md">
+                    İletişim & Teklif
+                </a>
             </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-metallic-300 hover:text-white focus:outline-none text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-metallic-950 border-b border-metallic-800 px-6 py-6 space-y-4">
+            <a href="#hakkimizda" class="block text-metallic-300 hover:text-white py-2">Hakkımızda</a>
+            <a href="#projeler" class="block text-metallic-300 hover:text-white py-2">Hizmetler & Çözümler</a>
+            <a href="#atolye" class="block text-metallic-300 hover:text-white py-2">Robotik Atölyesi</a>
+            <a href="#iletisim" class="block text-center px-5 py-3 rounded-xl bg-metallic-700 text-white font-semibold">İletişim & Teklif</a>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1 style="text-align: center;">
-    <span style="color: var(--primary-neon); text-transform: uppercase; font-weight: 800; letter-spacing: 1px;">BEMSES YAZILIM ATÖLYESİ</span>
-    <br>
-    <span style="color: var(--text-muted); font-size: 0.65em; font-weight: 400; display: block; margin-top: 10px;">Geleceği Bilgiyle İnşa Ediyoruz</span></h1>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden bg-gradient-to-b from-metallic-950 to-metallic-900">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-metallic-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <p>Tekirdağ Kapaklı merkezli atölyemizde, profesyonel yazılım çözümleri üretiyor ve yarının yazılımcılarını yetiştiriyoruz.</p>
-            <div class="hero-btns">
-                <div class="social-contact" style="margin-top: 25px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-    <a href="https://wa.me/905302376139" target="_blank" class="btn" style="background-color: #25D366; color: white; border: none; display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
-        <i class="fab fa-whatsapp"></i> WhatsApp
-    </a>
-
-    <a href="https://instagram.com/bemsesyazilim" target="_blank" class="btn" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; border: none; display: flex; align-items: center; gap: 8px; padding: 10px 20px;">
-        <i class="fab fa-instagram"></i> Instagram
-    </a>
-</div>
-                <a href="#hizmetler" class="btn btn-primary">Hizmetleri Gör</a>
-                <a href="#iletisim" class="btn btn-secondary">İletişime Geç</a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-metallic-800/80 border border-metallic-600/40 text-metallic-200 text-xs md:text-sm font-medium mb-6 shadow-inner">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>19 Mayıs Mahallesi Aslı Sokak No: 3, Kapaklı / Tekirdağ • Kurucu: KARADUMAN</span>
             </div>
-        </div>
-    </section>
+            
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
+                Yazılım, Dron, QR & <br class="hidden sm:inline">
+                <span class="metallic-gradient-text">Bakım-Onarım Çözümleri</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-metallic-300 mb-10">
+                Bemses Yazılım Atölyesi olarak özel platformlar, dron çekimleri, QR kod sistemleri ve geniş kapsamlı inşaat malzemeleri, boya, çatı, sıva, hasır çelik ve beton işleri sunuyoruz.
+            </p>
 
-    <section id="hizmetler" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Neler Yapıyoruz?</h2>
-                <p style="color: var(--text-muted);">İşletmeniz ve geleceğiniz için teknolojik çözümler</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#projeler" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-metallic-200 via-metallic-300 to-metallic-400 text-metallic-950 font-bold hover:opacity-90 transition-opacity shadow-lg shadow-metallic-500/20">
+                    Hizmetlerimiz
+                </a>
+                <a href="#atolye" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-metallic-800 hover:bg-metallic-700 text-metallic-200 font-bold border border-metallic-600/60 transition-colors shadow-md">
+                    Robotik Atölyesi
+                </a>
             </div>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
-                    <h3>Web Yazılım</h3>
-                    <p>Modern, hızlı ve tüm cihazlarla uyumlu kurumsal web siteleri.</p>
-                </div>
 
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-layer-group"></i></div>
-                    <h3>Web Uygulama</h3>
-                    <p>İş süreçlerinizi kolaylaştıran özel yönetim panelleri ve CRM sistemleri.</p>
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-20 pt-12 border-t border-metallic-700/50">
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold text-white">KOBİ</div>
+                    <div class="text-xs text-metallic-400 mt-1">Onaylı Beyanname</div>
                 </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Mobil Uygulama</h3>
-                    <p>iOS ve Android dünyasında yerinizi alacağınız performanslı uygulamalar.</p>
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold text-white">Dron & QR</div>
+                    <div class="text-xs text-metallic-400 mt-1">Görsel & Dijital Medya</div>
                 </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Yazılım Atölyesi</h3>
-                    <p>Çocuklar için algoritma, Robotik  ve temel kodlama atölye çalışmalarıyla teknolojiye ilk adım.</p>
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold text-white">Bakım-Onarım</div>
+                    <div class="text-xs text-metallic-400 mt-1">İnşaat, Sıva & Boya</div>
                 </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-magic"></i></div>
-                    <h3>Modern Tasarım</h3>
-                    <p>Kullanıcı deneyimini ön planda tutan, estetik ve profesyonel arayüz tasarımları.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-headset"></i></div>
-                    <h3>Teknik Destek</h3>
-                    <p>Projelerinizin sürekliliği için kesintisiz güncelleme ve teknik destek hizmeti.</p>
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold text-white">Kapaklı</div>
+                    <div class="text-xs text-metallic-400 mt-1">Fiziki Atölye Ofisi</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="iletisim" class="section container">
-        <div class="contact-box">
-            <div class="contact-info">
-                <h2>İletişim</h2>
-                <p>Kapaklı'daki atölyemize bir kahveye bekleriz ya da dijital kanallardan bize ulaşabilirsiniz.</p>
-                <ul class="contact-list">
-                    <li>
-                        <i class="fas fa-phone"></i> 
-                        <a href="tel:+905302376139">+90 (530) 237 61 39</a> </li>
-                    <li>
-                        <i class="fas fa-envelope"></i> 
-                        <a href="mailto:bemsesyazilimatolyesi@gmail.com">bemsesyazilimatolyesi@gmail.com</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i> 
-                        <span>Kapaklı, Tekirdağ</span>
-                    </li>
-                </ul>
+    <!-- Hakkımızda -->
+    <section id="hakkimizda" class="py-20 bg-metallic-950/60 border-t border-b border-metallic-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest text-metallic-400 font-semibold mb-2">Hakkımızda</h2>
+                    <h3 class="text-3xl sm:text-4xl font-bold mb-6 text-white">
+                        Teknolojiden Yapı Çözümlerine Geniş Hizmet Yelpazesi
+                    </h3>
+                    <p class="text-metallic-300 mb-6 leading-relaxed">
+                        KARADUMAN tarafından Tekirdağ Kapaklı ve Çerkezköy bölgesinde kurulan Bemses Yazılım Atölyesi; yazılım geliştirme, dron çekimi ve QR kod entegrasyonlarının yanı sıra inşaat malzemeleri, boya, çatı, sıva, hasır çelik ve beton bakım-onarım işlerinde profesyonel çözümler sunmaktadır.
+                    </p>
+                    <ul class="space-y-3 text-metallic-300">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-metallic-300"></i>
+                            <span>Özel Yazılım Projeleri, Dron Çekimleri ve QR Kod Sistemleri</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-metallic-300"></i>
+                            <span>İnşaat Malzemeleri, Boya, Çatı, Sıva, Hasır Çelik ve Beton Uygulamaları</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-metallic-300"></i>
+                            <span>Kapaklı Ofisinde Çocuklar İçin Robotik Kodlama Çalışmaları</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="metallic-card p-8 rounded-2xl relative shadow-xl">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-metallic-400/10 rounded-full blur-2xl"></div>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-metallic-800 flex items-center justify-center shrink-0 border border-metallic-600/50 text-metallic-200 text-xl shadow-inner">
+                                <i class="fa-solid fa-building-shield"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white">Adres ve İletişim</h4>
+                                <p class="text-sm text-metallic-400 mt-1">19 Mayıs Mah. Aslı Sok. No:3, Kapaklı / Tekirdağ</p>
+                                <p class="text-sm text-metallic-300 mt-1">Tel: 0530 231 61 39</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-metallic-800 flex items-center justify-center shrink-0 border border-metallic-600/50 text-metallic-200 text-xl shadow-inner">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white">E-Posta</h4>
+                                <p class="text-sm text-metallic-400 mt-1">bemsesyazilimatolyesi@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Bemses Yazılım Atölyesi. Kapaklı / Tekirdağ</p>
+    <!-- Projeler & Çözümler -->
+    <section id="projeler" class="py-24 bg-metallic-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-metallic-400 font-semibold mb-2">Hizmetlerimiz</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Yazılım, Dron, QR ve Bakım-Onarım İşleri</h3>
+                <p class="text-metallic-400 mt-4">İşletmenizin ve yapılarınızın tüm dijital ve teknik ihtiyaçları için profesyonel çözümler.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Kart 1: Yazılım & BSS -->
+                <div class="metallic-card p-8 rounded-2xl flex flex-col justify-between group shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-metallic-700 to-metallic-950 flex items-center justify-center text-metallic-200 text-2xl mb-6 border border-metallic-500/30 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Yazılım & BSS Platformu</h4>
+                        <p class="text-metallic-400 text-sm leading-relaxed">
+                            Özel web/mobil uygulamalar, B2B bulut platformları, sözleşme yönetim sistemleri ve otomasyon çözümleri.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-metallic-800 flex items-center text-xs font-semibold text-metallic-300">
+                        <span>Modern Teknolojiler</span>
+                    </div>
+                </div>
+
+                <!-- Kart 2: Dron & QR Kod -->
+                <div class="metallic-card p-8 rounded-2xl flex flex-col justify-between group shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-metallic-700 to-metallic-950 flex items-center justify-center text-metallic-200 text-2xl mb-6 border border-metallic-500/30 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid fa-camera-retro"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Dron Çekimi & QR Kod</h4>
+                        <p class="text-metallic-400 text-sm leading-relaxed">
+                            DJI Neo dron ile havadan ticari tanıtım çekimleri, medya üretimi ve hızlı erişim sağlayan özel QR kod sistemleri.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-metallic-800 flex items-center text-xs font-semibold text-metallic-300">
+                        <span>Görsel Medya & Dijital Entegrasyon</span>
+                    </div>
+                </div>
+
+                <!-- Kart 3: Bakım-Onarım & İnşaat -->
+                <div class="metallic-card p-8 rounded-2xl flex flex-col justify-between group shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-metallic-700 to-metallic-950 flex items-center justify-center text-metallic-200 text-2xl mb-6 border border-metallic-500/30 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid fa-helmet-safety"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">İnşaat, Bakım & Onarım</h4>
+                        <p class="text-metallic-400 text-sm leading-relaxed">
+                            İnşaat malzemeleri tedariği, boya, çatı, sıva, hasır çelik, beton dökümü ve genel yapı bakım-onarım işleri.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-metallic-800 flex items-center text-xs font-semibold text-metallic-300">
+                        <span>Kapsamlı Yapı Çözümleri</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Robotik Atölyesi -->
+    <section id="atolye" class="py-20 bg-metallic-950/60 border-t border-metallic-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-metallic-800 text-metallic-300 text-xs font-medium mb-4 border border-metallic-700">
+                        <i class="fa-solid fa-robot text-metallic-300"></i>
+                        <span>Kapaklı Atölye Çalışmaları</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-bold mb-6 text-white">
+                        Çocuklar İçin Robotik Kodlama Atölyesi
+                    </h3>
+                    <p class="text-metallic-300 mb-6 leading-relaxed">
+                        Kapaklı'daki ofisimizde çocuklar için düzenlediğimiz interaktif robotik kodlama ve teknoloji tanışma etkinlikleriyle miniklerin analitik düşünce yapısını ve el becerilerini geliştiriyoruz.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="metallic-card p-4 rounded-xl shadow-lg">
+                            <div class="text-white font-bold mb-1">Temel Algoritma</div>
+                            <div class="text-xs text-metallic-400">Mantıksal problem çözme becerisi</div>
+                        </div>
+                        <div class="metallic-card p-4 rounded-xl shadow-lg">
+                            <div class="text-white font-bold mb-1">Robotik & Devreler</div>
+                            <div class="text-xs text-metallic-400">Uygulamalı elektronik projeleri</div>
+                        </div>
+                    </div>
+                    <a href="#iletisim" class="inline-block px-6 py-3 rounded-xl bg-metallic-200 hover:bg-white text-metallic-950 font-bold transition-colors shadow-md">
+                        Atölye Ön Kayıt / Bilgi Al
+                    </a>
+                </div>
+                <div class="metallic-card p-8 rounded-2xl relative border-metallic-700/50 shadow-xl">
+                    <h4 class="text-xl font-bold text-white mb-4 flex items-center space-x-2">
+                        <i class="fa-solid fa-calendar-days text-metallic-300"></i>
+                        <span>Atölye Ön Kayıt Formu</span>
+                    </h4>
+                    <p class="text-sm text-metallic-400 mb-6">Atölye programlarımız hakkında bilgi almak veya ön kayıt oluşturmak için formu doldurun.</p>
+                    <form action=https://formspree.io/f/xbgdgykk method="POST" id="atolye-form" class="space-y-4" onsubmit="handleFormSubmit(event, 'Atölye ön kaydınız başarıyla alınmıştır ve mail olarak iletildi!')">
+                        <div>
+                            <label class="block text-xs font-medium text-metallic-300 mb-1">Veli Adı Soyadı</label>
+                            <input type="text" name="veli_adi" required class="w-full px-4 py-3 rounded-xl bg-metallic-950 border border-metallic-700 text-white focus:outline-none focus:border-metallic-400 text-sm shadow-inner" placeholder="Adınız Soyadınız">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-metallic-300 mb-1">İletişim Telefonu</label>
+                            <input type="tel" name="telefon" required class="w-full px-4 py-3 rounded-xl bg-metallic-950 border border-metallic-700 text-white focus:outline-none focus:border-metallic-400 text-sm shadow-inner" placeholder="05XX XXX XX XX">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-metallic-300 mb-1">Öğrenci Yaşı</label>
+                            <input type="number" name="ogrenci_yasi" required class="w-full px-4 py-3 rounded-xl bg-metallic-950 border border-metallic-700 text-white focus:outline-none focus:border-metallic-400 text-sm shadow-inner" placeholder="Örn: 10">
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-metallic-600 to-metallic-700 hover:from-metallic-500 hover:to-metallic-600 text-white font-semibold transition-all shadow-md">
+                            Ön Kayıt Gönder
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İletişim / Teklif Al -->
+    <section id="iletisim" class="py-24 bg-metallic-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest text-metallic-400 font-semibold mb-2">İletişim</h2>
+                    <h3 class="text-3xl sm:text-4xl font-bold mb-6 text-white">Projenizi Konuşalım</h3>
+                    <p class="text-metallic-300 mb-8 leading-relaxed">
+                        Yazılım, dron çekimi, QR kod, robotik atölyesi ya da inşaat/bakım-onarım işleriniz için bizimle iletişime geçin.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-metallic-950 border border-metallic-700 flex items-center justify-center text-metallic-300 shrink-0 shadow-inner">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Açık Adres</h4>
+                                <p class="text-sm text-metallic-400 mt-1">19 Mayıs Mahallesi, Aslı Sokak, No: 3, Kapaklı / Tekirdağ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-metallic-950 border border-metallic-700 flex items-center justify-center text-metallic-300 shrink-0 shadow-inner">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Telefon Numarası</h4>
+                                <p class="text-sm text-metallic-400 mt-1">0530 231 61 39</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-metallic-950 border border-metallic-700 flex items-center justify-center text-metallic-300 shrink-0 shadow-inner">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">E-Posta Adresi</h4>
+                                <p class="text-sm text-metallic-400 mt-1">bemsesyazilimatolyesi@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-metallic-950 border border-metallic-700 flex items-center justify-center text-metallic-300 shrink-0 shadow-inner">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Kurucu & Yönetim</h4>
+                                <p class="text-sm text-metallic-400 mt-1">KARADUMAN • Bemses Yazılım Atölyesi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metallic-card p-8 rounded-2xl shadow-xl">
+                    <h4 class="text-xl font-bold text-white mb-6">Teklif / Mesaj Gönder</h4>
+                    <form action=https://formspree.io/f/xbgdgykk method="POST" id="iletisim-form" class="space-y-4" onsubmit="handleFormSubmit(event, 'Mesajınız başarıyla iletildi ve mail kutunuza gönderildi!')">
+                        <div>
+                            <label class="block text-xs font-medium text-metallic-300 mb-1">Adınız Soyadınız</label>
+                            <input type="text" name="ad_soyad" required class="w-full px-4 py-3 rounded-xl bg-metallic-950 border border-metallic-700 text-white focus:outline-none focus:border-metallic-400 text-sm shadow-inner" placeholder="Adınız Soyadınız">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-metallic-300 mb-1">E-Posta Adresiniz</label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-metallic-950 border border-metallic-700 text-white focus:outline-none focus:border-metallic-400 text-sm shadow-inner" placeholder="ornek@sirket.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-metallic-300 mb-1">Proje / Hizmet Türü</label>
+                            <textarea name="mesaj" rows="4" required class="w-full px-4 py-3 rounded-xl bg-metallic-950 border border-metallic-700 text-white focus:outline-none focus:border-metallic-400 text-sm shadow-inner" placeholder="Talebinizden kısaca bahsedin..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-metallic-200 via-metallic-300 to-metallic-400 text-metallic-950 font-bold hover:opacity-90 transition-opacity shadow-lg">
+                            Gönder
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-metallic-950 border-t border-metallic-800 py-12 text-center text-sm text-metallic-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-metallic-300 to-metallic-700 flex items-center justify-center text-metallic-950 font-bold text-xs shadow-md">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <span class="text-base font-bold metallic-gradient-text tracking-wider">BEMSES YAZILIM ATÖLYESİ</span>
+            </div>
+            <p>&copy; 2026 Bemses Yazılım Atölyesi (KARADUMAN). Tüm hakları saklıdır. 19 Mayıs Mah. Aslı Sok. No:3 Kapaklı / Tekirdağ.</p>
         </div>
     </footer>
 
+    <!-- Success Modal Notification -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden">
+        <div class="metallic-card p-8 rounded-2xl max-w-md w-full mx-4 text-center border border-metallic-500/40 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-emerald-500/20">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 id="modal-title" class="text-xl font-bold text-white mb-2">İşlem Başarılı</h3>
+            <p id="modal-desc" class="text-sm text-metallic-300 mb-6">Talebiniz alınmıştır.</p>
+            <button onclick="closeModal()" class="px-6 py-2.5 rounded-xl bg-metallic-700 hover:bg-metallic-600 text-white font-semibold transition-colors text-sm shadow-md">
+                Tamam
+            </button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        function handleFormSubmit(event, message) {
+            event.preventDefault();
+            const form = event.target;
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                document.getElementById('modal-desc').innerText = message;
+                document.getElementById('success-modal').classList.remove('hidden');
+                form.reset();
+            }).catch(error => {
+                alert('Bir hata oluştu, lütfen tekrar deneyin.');
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
